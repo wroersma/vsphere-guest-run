@@ -156,7 +156,7 @@ class VSphere(object):
             InitiateFileTransferFromGuest(vm,
                                           creds,
                                           source_file)
-        return requests.get(info.url, verify=False)
+        return requests.get(info.url.replace("*:443", self.host), verify=False)
 
     def list_files_in_guest(self, vm, user, password, file_path, pattern):
         creds = vim.vm.guest.NamePasswordAuthentication(
